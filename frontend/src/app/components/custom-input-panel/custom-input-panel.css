@@ -1,0 +1,97 @@
+.member2-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.member2-card h3 {
+  font-size: 1rem;
+  color: #f8fafc;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #14b8a6;
+  color: #0f172a;
+}
+
+.btn.primary:hover {
+  background: #2dd4bf;
+}
+
+.btn.secondary {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+.btn.secondary:hover {
+  background: #475569;
+}
+
+.status-box {
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+}
+
+.status-box.valid {
+  border-color: #14b8a6;
+  color: #2dd4bf;
+}
+
+.status-box.invalid {
+  border-color: #f43f5e;
+  color: #fda4af;
+}
+
+.stats-row {
+  display: flex;
+  gap: 12px;
+}
+
+.stat {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.stat .label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.stat .value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f8fafc;
+}

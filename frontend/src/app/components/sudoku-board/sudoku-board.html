@@ -1,0 +1,32 @@
+<div class="board-wrapper">
+  <div class="sudoku-grid">
+    @for (r of rows; track r) {
+      <div class="sudoku-row" [class.box-bottom]="r === 2 || r === 5">
+        @for (c of cols; track c) {
+          <button
+            type="button"
+            class="sudoku-cell"
+            [class.box-right]="c === 2 || c === 5"
+            [class.initial]="isInitial(r, c)"
+            [class.ai-filled]="!isInitial(r, c) && board[r]?.[c] !== 0"
+            [class.selected]="isSelected(r, c)"
+            [class.peer]="isPeer(r, c)"
+            [class.same-number]="isSameNumber(r, c)"
+            [class.active-ac3]="isActiveAc3(r, c)"
+            [class.conflict]="isConflict(r, c)"
+            (click)="selectCell(r, c)">
+            @if (board[r]?.[c] && board[r][c] !== 0) {
+              <span class="cell-value">{{ board[r][c] }}</span>
+            } @else if (showDomains) {
+              <div class="candidates-grid">
+                @for (d of digits; track d) {
+                  <span class="candidate" [class.visible]="hasCandidate(r, c, d)">{{ d }}</span>
+                }
+              </div>
+            }
+          </button>
+        }
+      </div>
+    }
+  </div>
+</div>

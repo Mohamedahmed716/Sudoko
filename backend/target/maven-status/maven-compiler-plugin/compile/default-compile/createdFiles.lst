@@ -1,0 +1,12 @@
+com\sudoku\config\CorsConfig.class
+com\sudoku\model\ValidateResponse.class
+com\sudoku\model\SolveResponse.class
+com\sudoku\model\SolveStep.class
+com\sudoku\service\BacktrackingService.class
+com\sudoku\model\BoardRequest.class
+com\sudoku\service\ArcConsistencyService.class
+com\sudoku\SudokuApplication.class
+com\sudoku\model\MoveCheckRequest.class
+com\sudoku\controller\SudokuController.class
+com\sudoku\model\Arc.class
+com\sudoku\model\MoveCheckResponse.class

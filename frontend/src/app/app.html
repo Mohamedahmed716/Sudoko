@@ -1,0 +1,170 @@
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-dot"></div>
+      <span class="brand-name">Sudoku<span class="accent">CSP</span></span>
+    </div>
+
+    <nav class="mode-tabs">
+      <button
+        type="button"
+        class="tab-btn"
+        [class.active]="mode === 'ai-solve'"
+        (click)="switchMode('ai-solve')">
+        AI Solver (Mode 1)
+      </button>
+      <button
+        type="button"
+        class="tab-btn"
+        [class.active]="mode === 'custom-input'"
+        (click)="switchMode('custom-input')">
+        Custom Board (Mode 2)
+      </button>
+      <button
+        type="button"
+        class="tab-btn"
+        [class.active]="mode === 'interactive'"
+        (click)="switchMode('interactive')">
+        Play Mode (Bonus)
+      </button>
+    </nav>
+
+    <div class="top-actions">
+      <label class="toggle-label">
+        <input type="checkbox" [checked]="showDomains" (change)="showDomains = !showDomains" />
+        <span>Show Domains</span>
+      </label>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="board-section">
+      @if (mode === 'ai-solve') {
+        <div class="difficulty-bar">
+          @for (d of ['easy', 'intermediate', 'hard']; track d) {
+            <button
+              type="button"
+              class="diff-btn"
+              [class.active]="difficulty === d"
+              (click)="setDifficulty($any(d))">
+              {{ d | titlecase }}
+            </button>
+          }
+          <button type="button" class="new-btn" (click)="loadNewPuzzle()">New Puzzle</button>
+        </div>
+      }
+
+      <app-sudoku-board
+        [board]="board"
+        [initialBoard]="initialBoard"
+        [domains]="domains"
+        [showDomains]="showDomains"
+        [selectedCell]="selectedCell"
+        [activeCell]="activeAc3Cell"
+        [conflictCells]="conflictCells"
+        (cellSelected)="onCellSelected($event)">
+      </app-sudoku-board>
+
+      <div class="numpad">
+        @for (n of digits; track n) {
+          <button
+            type="button"
+            class="num-btn"
+            [disabled]="mode === 'ai-solve'"
+            (click)="onNumberInput(n)">
+            {{ n }}
+          </button>
+        }
+        <button
+          type="button"
+          class="num-btn erase"
+          [disabled]="mode === 'ai-solve'"
+          (click)="onNumberInput(0)">
+          Erase
+        </button>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      @if (mode === 'ai-solve') {
+        <div class="panel-card">
+          <h3>AC-3 Solver Controls</h3>
+          <div class="controls-grid">
+            <button type="button" class="btn primary" (click)="solveWithAc3()">Solve with AC-3</button>
+            <button type="button" class="btn secondary" (click)="resetBoard()">Reset</button>
+            @if (hasAttemptedSolve) {
+              <button
+                type="button"
+                class="btn secondary"
+                [disabled]="currentStepIndex >= steps.length"
+                (click)="stepForward()">
+                Next Step
+              </button>
+              <button
+                type="button"
+                class="btn secondary"
+                [disabled]="currentStepIndex >= steps.length"
+                (click)="isPlaying ? stopPlayback() : startPlayback()">
+                {{ isPlaying ? 'Pause' : 'Auto Play' }}
+              </button>
+              <button
+                type="button"
+                class="btn accent-btn"
+                [disabled]="currentStepIndex >= steps.length"
+                (click)="finishInstantly()">
+                Finish All
+              </button>
+            }
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">Time</span>
+              <span class="stat-value">{{ solveTimeMs !== null ? solveTimeMs + ' ms' : '--' }}</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">AC-3 Steps</span>
+              <span class="stat-value">{{ currentStepIndex }} / {{ steps.length }}</span>
+            </div>
+          </div>
+
+          @if (solverMessage) {
+            <div class="solver-msg">{{ solverMessage }}</div>
+          }
+        </div>
+
+        <div class="panel-card trace-card">
+          <h3>Arc Consistency Trace</h3>
+          <div class="trace-list">
+            @if (steps.length === 0) {
+              <p class="empty-trace">Click "Solve with AC-3" to view domain reductions and assignments.</p>
+            }
+            @for (step of steps.slice(0, currentStepIndex).slice(-30).reverse(); track $index) {
+              <div class="trace-item" [class.assign]="step.action === 'ASSIGN'">
+                <span class="badge">{{ step.action }}</span>
+                <span>
+                  ({{ step.row + 1 }},{{ step.col + 1 }})
+                  @if (step.action === 'REVISE') {
+                    removed {{ step.removedValue }} (arc from {{ step.neighborRow + 1 }},{{ step.neighborCol + 1 }})
+                  } @else {
+                    assigned <strong>{{ step.assignedValue }}</strong>
+                  }
+                </span>
+              </div>
+            }
+          </div>
+        </div>
+      } @else {
+        <app-custom-input-panel
+          [mode]="mode"
+          [validationMessage]="validationMessage"
+          [isBoardValid]="isBoardValid"
+          [mistakes]="mistakes"
+          (clearBoardClicked)="clearBoard()"
+          (validateAndSolveClicked)="validateAndSolveCustomBoard()"
+          (newPlayPuzzleClicked)="loadNewPuzzle()">
+        </app-custom-input-panel>
+      }
+    </aside>
+  </main>
+</div>

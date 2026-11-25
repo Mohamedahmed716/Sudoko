@@ -1,0 +1,44 @@
+<div class="member2-card">
+  @if (mode === 'custom-input') {
+    <h3>Mode 2: Custom Board Input</h3>
+    <p class="hint">
+      Click any cell and type 1-9 (or use the number pad) to enter your puzzle, then validate and solve.
+    </p>
+
+    <div class="btn-group">
+      <button type="button" class="btn secondary" (click)="onClearBoard()">Clear Grid</button>
+      <button type="button" class="btn primary" (click)="onValidateAndSolve()">Validate & Solve</button>
+    </div>
+
+    <!-- TODO: Member 2 - show validation result / error message here -->
+    @if (validationMessage) {
+      <div class="status-box" [class.valid]="isBoardValid === true" [class.invalid]="isBoardValid === false">
+        {{ validationMessage }}
+      </div>
+    }
+  }
+
+  @if (mode === 'interactive') {
+    <h3>Bonus: Interactive Play Mode</h3>
+    <p class="hint">
+      Click any empty cell and type 1-9 (or use the number pad). Constraint violations are highlighted in real time.
+    </p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <span class="label">Mistakes</span>
+        <span class="value">{{ mistakes }}</span>
+      </div>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn primary" (click)="onNewPlayPuzzle()">New Game</button>
+    </div>
+
+    @if (validationMessage) {
+      <div class="status-box" [class.valid]="isBoardValid === true" [class.invalid]="isBoardValid === false">
+        {{ validationMessage }}
+      </div>
+    }
+  }
+</div>

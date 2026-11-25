@@ -1,0 +1,126 @@
+.board-wrapper {
+  display: inline-block;
+  padding: 6px;
+  background: #1e293b;
+  border-radius: 12px;
+  border: 2px solid #334155;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.sudoku-grid {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #6366f1;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.sudoku-row {
+  display: flex;
+}
+
+.sudoku-row.box-bottom {
+  border-bottom: 2px solid #6366f1;
+}
+
+.sudoku-cell {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #263248;
+  background: #131c31;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.12s ease;
+  position: relative;
+}
+
+.sudoku-cell.box-right {
+  border-right: 2px solid #6366f1;
+}
+
+.sudoku-cell:hover {
+  background: #1e293b;
+}
+
+.sudoku-cell.peer {
+  background: rgba(99, 102, 241, 0.14);
+}
+
+.sudoku-cell.same-number {
+  background: rgba(99, 102, 241, 0.28);
+}
+
+.sudoku-cell.selected {
+  background: rgba(20, 184, 166, 0.32);
+  outline: 2px solid #14b8a6;
+  outline-offset: -2px;
+  z-index: 2;
+}
+
+.sudoku-cell.active-ac3 {
+  background: rgba(245, 158, 11, 0.25);
+  outline: 2px solid #f59e0b;
+  outline-offset: -2px;
+}
+
+.sudoku-cell.conflict {
+  background: rgba(244, 63, 94, 0.28);
+  color: #fda4af;
+}
+
+.cell-value {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sudoku-cell.initial .cell-value {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+.sudoku-cell.ai-filled .cell-value {
+  color: #2dd4bf;
+}
+
+.candidates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+}
+
+.candidate {
+  font-size: 0.6rem;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.candidate.visible {
+  color: #94a3b8;
+}
+
+@media (max-width: 600px) {
+  .sudoku-cell {
+    width: 38px;
+    height: 38px;
+  }
+
+  .cell-value {
+    font-size: 1.05rem;
+  }
+
+  .candidate {
+    font-size: 0.5rem;
+  }
+}

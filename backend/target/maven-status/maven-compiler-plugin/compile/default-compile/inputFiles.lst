@@ -1,0 +1,12 @@
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\config\CorsConfig.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\controller\SudokuController.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\model\Arc.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\model\BoardRequest.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\model\MoveCheckRequest.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\model\MoveCheckResponse.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\model\SolveResponse.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\model\SolveStep.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\model\ValidateResponse.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\service\ArcConsistencyService.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\service\BacktrackingService.java
+F:\College\Semester_7\AI\Labs\Lab2\backend\src\main\java\com\sudoku\SudokuApplication.java
